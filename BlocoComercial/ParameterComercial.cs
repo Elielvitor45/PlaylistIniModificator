@@ -69,11 +69,24 @@ namespace IniModificator.BlocoComercial
         }
         public List<string> buildList(List<string> ini)
         {
-            var ini2 = ini;
+            List<string> ini2 = ini;
             var condicion = ini2.FirstOrDefault(x => x.Contains("[BLOCO COMERCIAL]"));
             if (condicion != null)
             {
                 //EstouModificandoEsseLugarAtualmente
+
+                var palavrasModificadas = ini2
+                .Select((p, i) => (Palavra: p, Indice: i))
+                .SelectMany((x, index) =>
+                {
+                    if (x.Indice > 0 && ini2[x.Indice - 1] == "[BLOCO COMERCIAL]")
+                        return new[] { x.Palavra+"--"+x.Indice  };
+                    else
+                        return Enumerable.Empty<string>();
+                })
+                .ToList();
+
+
                 var formato = ini2.FirstOrDefault(x => x.Contains("FORMATO=")).Split('=')[1];
                 var formato2 = list.FirstOrDefault(x => x.Contains("FORMATO=")).Split('=')[1];
                 int pos = ini2.FindIndex(x => x.Contains("FORMATO=AUTO"));
