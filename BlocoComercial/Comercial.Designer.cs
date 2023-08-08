@@ -69,6 +69,7 @@
             this.checkAuto.TabIndex = 2;
             this.checkAuto.Text = "Auto";
             this.checkAuto.UseVisualStyleBackColor = true;
+            this.checkAuto.CheckedChanged += new System.EventHandler(this.checkAuto_CheckedChanged);
             // 
             // checkTxt
             // 
@@ -79,6 +80,7 @@
             this.checkTxt.TabIndex = 3;
             this.checkTxt.Text = "TXT1";
             this.checkTxt.UseVisualStyleBackColor = true;
+            this.checkTxt.CheckedChanged += new System.EventHandler(this.checkTxt_CheckedChanged);
             // 
             // label3
             // 
@@ -95,30 +97,33 @@
             this.checkMapa.AutoSize = true;
             this.checkMapa.Location = new System.Drawing.Point(86, 162);
             this.checkMapa.Name = "checkMapa";
-            this.checkMapa.Size = new System.Drawing.Size(56, 19);
+            this.checkMapa.Size = new System.Drawing.Size(73, 19);
             this.checkMapa.TabIndex = 5;
-            this.checkMapa.Text = "Mapa";
+            this.checkMapa.Text = "Mapa.txt";
             this.checkMapa.UseVisualStyleBackColor = true;
+            this.checkMapa.CheckedChanged += new System.EventHandler(this.checkMapa_CheckedChanged);
             // 
             // checkBoxDataN
             // 
             this.checkBoxDataN.AutoSize = true;
-            this.checkBoxDataN.Location = new System.Drawing.Point(148, 162);
+            this.checkBoxDataN.Location = new System.Drawing.Point(161, 162);
             this.checkBoxDataN.Name = "checkBoxDataN";
             this.checkBoxDataN.Size = new System.Drawing.Size(105, 19);
             this.checkBoxDataN.TabIndex = 6;
             this.checkBoxDataN.Text = "Data Numerica";
             this.checkBoxDataN.UseVisualStyleBackColor = true;
+            this.checkBoxDataN.CheckedChanged += new System.EventHandler(this.checkBoxDataN_CheckedChanged);
             // 
             // checkBoxDataS
             // 
             this.checkBoxDataS.AutoSize = true;
-            this.checkBoxDataS.Location = new System.Drawing.Point(259, 162);
+            this.checkBoxDataS.Location = new System.Drawing.Point(272, 162);
             this.checkBoxDataS.Name = "checkBoxDataS";
             this.checkBoxDataS.Size = new System.Drawing.Size(104, 19);
             this.checkBoxDataS.TabIndex = 7;
             this.checkBoxDataS.Text = "Dia da Semana";
             this.checkBoxDataS.UseVisualStyleBackColor = true;
+            this.checkBoxDataS.CheckedChanged += new System.EventHandler(this.checkBoxDataS_CheckedChanged);
             // 
             // button1
             // 

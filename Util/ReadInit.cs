@@ -15,16 +15,7 @@ namespace IniModificator.Util
             initPath = path;
             lines = File.ReadAllLines(initPath).ToList();
         }
-        public void addParametersInit()
-        {
 
-
-
-
-
-
-
-        }
 
 
 

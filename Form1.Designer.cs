@@ -82,8 +82,9 @@
             // configurarToolStripMenuItem1
             // 
             this.configurarToolStripMenuItem1.Name = "configurarToolStripMenuItem1";
-            this.configurarToolStripMenuItem1.Size = new System.Drawing.Size(131, 22);
+            this.configurarToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
             this.configurarToolStripMenuItem1.Text = "Configurar";
+            this.configurarToolStripMenuItem1.Click += new System.EventHandler(this.configurarToolStripMenuItem1_Click);
             // 
             // afiliadaToolStripMenuItem
             // 
