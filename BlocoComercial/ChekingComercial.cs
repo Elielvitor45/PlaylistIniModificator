@@ -89,25 +89,23 @@ namespace IniModificator.BlocoComercial
                             return Enumerable.Empty<string>();
                     })
                     .ToList();
-                palavrasModificadas.AddRange(palavrasModificadas[0].Split('-'));
-                palavrasModificadas.RemoveAt(0);
+                try
+                {
+                    palavrasModificadas.AddRange(palavrasModificadas[0].Split('-'));
+                    palavrasModificadas.RemoveAt(0);
+                }
+                catch (Exception)
+                {
+                    return null;
+                    throw;
+                }
                 return palavrasModificadas;
             }
             else
             {
-
                 MessageBox.Show("Playlist.ini não pode ser nulo", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return null;
             }
         }
-
-
-
-
-
-
-
-
-
     }
 }

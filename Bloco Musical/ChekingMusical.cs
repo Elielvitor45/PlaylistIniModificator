@@ -21,16 +21,27 @@ namespace IniModificator.Bloco_Musical
         private void GeneralCheck(List<string> ini)
         {
             List<string> format = GetFormat(ini);
-            ReadFormat(format);
-            if (auto == true)
+            if (format == null)
             {
                 chekingGrade = false;
                 chekingDataS = false;
                 chekingDataN = false;
+                auto = false;
+                txt1 = false;
             }
-            else if (auto == false)
+            else
             {
-                ReadArchive(format[1], ini);
+                ReadFormat(format);
+                if (auto == true)
+                {
+                    chekingGrade = false;
+                    chekingDataS = false;
+                    chekingDataN = false;
+                }
+                else if (auto == false)
+                {
+                    ReadArchive(format[1], ini);
+                }
             }
         }
         private void ReadArchive(string format, List<string> ini)
@@ -89,9 +100,17 @@ namespace IniModificator.Bloco_Musical
                             return Enumerable.Empty<string>();
                     })
                     .ToList();
-                palavrasModificadas.AddRange(palavrasModificadas[0].Split('-'));
-                palavrasModificadas.RemoveAt(0);
-                return palavrasModificadas;
+                try
+                {
+                    palavrasModificadas.AddRange(palavrasModificadas[0].Split('-'));
+                    palavrasModificadas.RemoveAt(0);
+                }
+                catch (Exception)
+                {
+                    return null;
+                    throw;
+                }
+                    return palavrasModificadas;
             }
             else
             {

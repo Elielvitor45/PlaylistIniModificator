@@ -1,4 +1,5 @@
-﻿using System;
+﻿using IniModificator.Playlist.Ini;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,36 +13,42 @@ namespace IniModificator.BlocoComercial
 {
     public partial class Comercial : Form
     {
-        public Comercial()
+        public string playlist_ini_path { get; set; }
+
+        Playlist_Ini playlistIni = new Playlist_Ini();
+        public Comercial(string playlist_ini_path)
         {
             InitializeComponent();
+            this.playlist_ini_path = playlist_ini_path;
         }
         private bool checkingmap;
         private bool checkingDataN;
         private bool checkingDataS;
-        private Form1 f2 = new Form1();
+
         private void Comercial_Load(object sender, EventArgs e)
         {
-            ChekingComercial cheking = new ChekingComercial(f2.ini);
-            checkBoxDataN.Checked = cheking.chekingDataN;
-            checkBoxDataS.Checked = cheking.chekingDataS;
-            checkMapa.Checked = cheking.chekingMap;
-            checkAuto.Checked = cheking.auto;
-            checkTxt.Checked = cheking.txt1;
+          
         }
-        private List<bool> boolComercial()
+        public byte getArchiveType()
         {
-            List<bool> comercial = new List<bool>();
-            comercial.Add(checkBoxDataN.Checked);
-            comercial.Add(checkBoxDataS.Checked);
-            comercial.Add(checkAuto.Checked);
-            comercial.Add(checkTxt.Checked);
-            comercial.Add(checkMapa.Checked);
-            return comercial;
+            byte archiveType = new byte();
+            if (checkMapa.Checked == true)
+            {
+                archiveType = 0;
+            }
+            else if (checkingDataN == true)
+            {
+                archiveType = 1;
+            }
+            else if (checkingDataS == true)
+            {
+                archiveType= 2;
+            }
+            return archiveType;
         }
         private void button1_Click(object sender, EventArgs e)
-        {   
-            ParameterComercial comercial = new ParameterComercial(f2.ini,boolComercial(),f2.path);
+        {
+            playlistIni.ReadPlaylist_ini(playlist_ini_path,true,checkTxt.Checked, getArchiveType());
         }
         private void checkMapa_CheckedChanged(object sender, EventArgs e)
         {

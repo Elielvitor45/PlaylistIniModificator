@@ -1,5 +1,6 @@
 using IniModificator.Bloco_Musical;
 using IniModificator.BlocoComercial;
+using IniModificator.Playlist.Ini;
 using IniModificator.Util;
 using static System.Windows.Forms.LinkLabel;
 namespace IniModificator
@@ -11,22 +12,23 @@ namespace IniModificator
         public Form1()
         {
             InitializeComponent();
+            //Playlist_Ini teste = new Playlist_Ini("", false, true, 0);
             textBox.Text = @"C:\Playlist\pgm";
             path = textBox.Text;
             path += @"\PLAYLIST.ini";
-            try
-            {
-                ini = File.ReadAllLines(path).ToList();
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show(e.Message,"Erro",MessageBoxButtons.OK,MessageBoxIcon.Error);
-                throw;
-            }
+            //try
+            //{
+            //    ini = File.ReadAllLines(path).ToList();
+            //}
+            //catch (Exception e)
+            //{
+            //    MessageBox.Show(e.Message,"Erro",MessageBoxButtons.OK,MessageBoxIcon.Error);
+            //    throw;
+            //}
         }
         private void configurarToolStripMenuItem_Click_1(object sender, EventArgs e)
         {
-            Comercial commercialWindow = new Comercial();
+            Comercial commercialWindow = new Comercial(textBox.Text);
             commercialWindow.ShowDialog();
         }
         private void button1_Click_1(object sender, EventArgs e)
