@@ -14,12 +14,14 @@ namespace IniModificator.Playlist.Ini
         public Playlist_Ini(){
 
         }
-        private void UpdatePlaylistIni(List<string> bloco,bool blockType) {
+        private bool UpdatePlaylistIni(List<string> bloco,bool blockType) {
             bool filter = false;
             int cont = 0;
+            var condicion0 = playlist_ini.FirstOrDefault(x => x.Contains("[BLOCO COMERCIAL]"));
+            var condicion1 = playlist_ini.FirstOrDefault(x => x.Contains("[BLOCO MUSICAL]"));
             for (int i = 0; i < playlist_ini.Count; i++)
             {
-                if ((blockType == true && playlist_ini[i].Equals("[BLOCO COMERCIAL]")) || filter == true)
+                if ((blockType == true && playlist_ini[i].Equals("[BLOCO COMERCIAL]") && !string.IsNullOrEmpty(condicion0)) || filter == true)
                 {
                     filter = true;
                     playlist_ini[i] = bloco[cont];
@@ -27,28 +29,30 @@ namespace IniModificator.Playlist.Ini
 
                     if (playlist_ini[i].Equals("FORMATO=AUTO"))
                     {
-                        break;
+                        return true;
+   
                     }
                     else if (playlist_ini[i].StartsWith("ARQUIVO="))
                     {
-                        break;
+                        return true;
                     }
                 }
-                else if ((blockType == false && playlist_ini[i].Equals("[BLOCO MUSICAL]")) || filter == true)
+                else if ((blockType == false && playlist_ini[i].Equals("[BLOCO MUSICAL]") && !string.IsNullOrEmpty(condicion1)) || filter == true)
                 {
                     filter = true;
                     playlist_ini[i] = bloco[cont];
                     cont++;
                     if (playlist_ini[i].Equals("FORMATO=AUTO"))
                     {
-                        break;
+                        return true;
                     }
                     else if (playlist_ini[i].StartsWith("ARQUIVO="))
                     {
-                        break;
+                        return true;
                     }
                 }
             }
+            return false;
         }
         public void ReadPlaylist_ini(string path, bool Blocktype, bool formatType, byte archiveType)
         {
@@ -58,9 +62,18 @@ namespace IniModificator.Playlist.Ini
         }
         public void WritePlaylist_ini(string path, bool Blocktype, bool formatType, byte archiveType)
         {
-            Blocos bloco = new Blocos(Blocktype, formatType,archiveType);
-            UpdatePlaylistIni(bloco.blocos.Split('@').ToList(), Blocktype);
-            File.WriteAllLines(path, playlist_ini);
+            Blocos bloco = new Blocos(Blocktype, formatType, archiveType);
+            
+            if (UpdatePlaylistIni(bloco.blocos.Split('@').ToList(), Blocktype))
+            {
+                File.WriteAllLines(path, playlist_ini);
+            }
+            else
+            {
+                playlist_ini.AddRange(bloco.blocos.Split('@').ToList());
+                File.WriteAllLines(path, playlist_ini);
+            }
+            
         }
     }
 }

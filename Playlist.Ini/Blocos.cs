@@ -28,20 +28,30 @@ namespace IniModificator.Playlist.Ini
             }
         }
         private void ReadFormatAndArchivetype(bool formatType, byte archiveType) {
+            string block;
+            if (blockType == true)
+            {
+                block = "MAPAS";
+
+            }
+            else
+            {
+                block = "GRADES";
+            }
             if (formatType == true)
             {
                 blocos += "FORMATO=TXT1@";
                 if (archiveType == 1)
                 {
-                    blocos += "ARQUIVO=GRADES\\%d-%m-%Y.TXT";
+                    blocos += $"ARQUIVO={block}\\%d-%m-%Y.TXT";
                 }
                 else if (archiveType == 2)
                 {
-                    blocos += "ARQUIVO=GRADES\\%a.txt";
+                    blocos += $"ARQUIVO={block}\\%a.txt";
                 }
                 else if (archiveType == 0 && blockType == true)
                 {
-                    blocos += "ARQUIVO=GRADES\\Mapa.txt";
+                    blocos += "ARQUIVO=MAPAS\\Mapa.txt";
                 }
                 else if (archiveType == 0 && blockType == false)
                 {

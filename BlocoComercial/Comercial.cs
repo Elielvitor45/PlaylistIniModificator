@@ -14,7 +14,6 @@ namespace IniModificator.BlocoComercial
     public partial class Comercial : Form
     {
         public string playlist_ini_path { get; set; }
-
         Playlist_Ini playlistIni = new Playlist_Ini();
         public Comercial(string playlist_ini_path)
         {
@@ -24,10 +23,8 @@ namespace IniModificator.BlocoComercial
         private bool checkingmap;
         private bool checkingDataN;
         private bool checkingDataS;
-
         private void Comercial_Load(object sender, EventArgs e)
         {
-          
         }
         public byte getArchiveType()
         {
