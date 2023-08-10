@@ -10,9 +10,8 @@ namespace IniModificator.Playlist.Ini
     public class Playlist_Ini
     {
         public List<string> playlist_ini { get; set; } = new List<string>();
-
+        public ChekingBlocks chekingBlocks { get; set; } = new ChekingBlocks();
         public Playlist_Ini(){
-
         }
         private bool UpdatePlaylistIni(List<string> bloco,bool blockType) {
             bool filter = false;
@@ -30,7 +29,6 @@ namespace IniModificator.Playlist.Ini
                     if (playlist_ini[i].Equals("FORMATO=AUTO"))
                     {
                         return true;
-   
                     }
                     else if (playlist_ini[i].StartsWith("ARQUIVO="))
                     {
@@ -54,26 +52,32 @@ namespace IniModificator.Playlist.Ini
             }
             return false;
         }
+        public void ReadPlaylist_ini(string path, bool Blocktype)
+        {
+            path += "\\PLAYLIST.ini";
+            playlist_ini = File.ReadAllLines(path).ToList();
+            chekingBlocks.init(playlist_ini,Blocktype);
+        }
         public void ReadPlaylist_ini(string path, bool Blocktype, bool formatType, byte archiveType)
         {
-            path = @"C:\Playlist\pgm\PLAYLIST.ini";
             playlist_ini = File.ReadAllLines(path).ToList();
             WritePlaylist_ini(path, Blocktype, formatType, archiveType);
         }
         public void WritePlaylist_ini(string path, bool Blocktype, bool formatType, byte archiveType)
         {
+            path += "\\PLAYLIST.ini";
             Blocos bloco = new Blocos(Blocktype, formatType, archiveType);
-            
             if (UpdatePlaylistIni(bloco.blocos.Split('@').ToList(), Blocktype))
             {
                 File.WriteAllLines(path, playlist_ini);
             }
             else
             {
+                playlist_ini.Add("");
                 playlist_ini.AddRange(bloco.blocos.Split('@').ToList());
                 File.WriteAllLines(path, playlist_ini);
-            }
-            
+            }   
         }
     }
+
 }

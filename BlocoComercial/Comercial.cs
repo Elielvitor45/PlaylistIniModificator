@@ -25,7 +25,21 @@ namespace IniModificator.BlocoComercial
         private bool checkingDataS;
         private void Comercial_Load(object sender, EventArgs e)
         {
+            playlistIni.ReadPlaylist_ini(playlist_ini_path, true);
+            ReadCheking(playlistIni.chekingBlocks);
         }
+        public void ReadCheking(ChekingBlocks check)
+        {
+            checkMapa.Checked = check.cheking_txt;
+            checkBoxDataS.Checked = check.chekingDataS;
+            checkBoxDataN.Checked = check.chekingDataN;
+            checkAuto.Checked = check.auto;
+            checkTxt.Checked = check.formatTxt1;
+
+        }
+
+
+
         public byte getArchiveType()
         {
             byte archiveType = new byte();
